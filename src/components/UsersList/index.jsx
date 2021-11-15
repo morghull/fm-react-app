@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UserCard from '../UserCard';
 
 const usersDB = [
   { id: 1, fname: 'ELon' },
@@ -8,6 +9,7 @@ const usersDB = [
   { id: 9, fname: 'Lee' },
   { id: 5, fname: 'Lao' },
   { id: 6, fname: 'Laod' },
+  { id: 7, fname: 'Bob' },
 ];
 
 class UsersList extends Component {
@@ -15,18 +17,13 @@ class UsersList extends Component {
     super(props);
     this.state = { users: usersDB };
   }
+  userMapping = (user) => <UserCard key={user.id} user={user} />;
   render() {
     const { users } = this.state;
     return (
       <section>
         <h1>List of users:</h1>
-        {users.map(({ id, fname }) => (
-          <article>
-            <h2>
-              <span>{id})</span> {fname}
-            </h2>
-          </article>
-        ))}
+        {users.map(this.userMapping)}
       </section>
     );
   }
