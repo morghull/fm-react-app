@@ -1,15 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import Greeting from './components/Greeting';
+import Ciao from './components/Ciao';
 
 function App() {
+  const user = {
+    fname: 'ELon',
+    sname: 'Musk',
+  };
   return (
     <>
-      <Greeting prefix="hi, my dear" name="Elon Must" />
-      <Greeting prefix="hi, some random" name="Tim Lee" />
-      <Greeting prefix="hi, beautiful" name="Elen" />
-      <Greeting prefix="hi, beautiful" name="Tetiana" />
+      <Ciao name="Elon Must" />
+      <Ciao name="Tim Lee" />
+      <Ciao name="Elen" />
+      <Ciao name={`${user.fname} ${user.sname}`} />
     </>
   );
 }
