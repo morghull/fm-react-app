@@ -19,9 +19,13 @@ class App extends Component {
   render() {
     const { users } = this.state;
     return (
-      <>
-        <Ciao name={fname} />
-      </>
+      <ul>
+        {users.map(({ fname, id }) => (
+          <li>
+            <Ciao key={id} name={fname} />
+          </li>
+        ))}
+      </ul>
     );
   }
 }
