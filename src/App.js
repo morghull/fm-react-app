@@ -9,6 +9,7 @@ function App() {
       <Greeting prefix="hi, my dear" name="Elon Must" />
       <Greeting prefix="hi, some random" name="Tim Lee" />
       <Greeting prefix="hi, beautiful" name="Elen" />
+      <Greeting prefix="hi, beautiful" name="Tetiana" />
     </>
   );
 }
