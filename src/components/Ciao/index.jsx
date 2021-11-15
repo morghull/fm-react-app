@@ -5,6 +5,10 @@ class Ciao extends Component {
     super(props);
     this.state = { isHi: true };
   }
+  buttonOnCLickHandler = () => {
+    const { isHi } = this.state;
+    this.setState({ isHi: !isHi });
+  };
   render() {
     const { name } = this.props;
     const { isHi } = this.state;
@@ -13,13 +17,7 @@ class Ciao extends Component {
         <h2>
           {isHi ? 'Hi' : 'Bye'}, {name}!
         </h2>
-        <button
-          onClick={() => {
-            this.setState({ isHi: !isHi });
-          }}
-        >
-          Ciao
-        </button>
+        <button onClick={this.buttonOnCLickHandler}>Ciao</button>
       </>
     );
   }
