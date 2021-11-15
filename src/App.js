@@ -7,15 +7,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fname: 'ELon',
-      sname: 'Musk',
+      users: [
+        { id: 1, fname: 'ELon' },
+        { id: 2, fname: 'Elen' },
+        { id: 3, fname: 'Andre' },
+        { id: 4, fname: 'Tim' },
+        { id: 5, fname: 'Lee' },
+      ],
     };
   }
   render() {
-    const { fname } = this.state;
+    const { users } = this.state;
     return (
       <>
-        <Ciao name="Elen" />
         <Ciao name={fname} />
       </>
     );
