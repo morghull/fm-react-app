@@ -33,12 +33,14 @@ class App extends Component {
     const { users, isStraight } = this.state;
     return (
       <>
-        <p>{isStraight ? 'straight' : 'reverse'}</p>
-        <button onClick={this.sortUsers}>sort</button>
+        <p>
+          {isStraight ? 'straight' : 'reverse'}
+          <button onClick={this.sortUsers}>sort</button>
+        </p>
         <ul>
-          {users.map(({ fname, id }, i) => (
-            <li key={i}>
-              <Ciao key={id} name={fname} />
+          {users.map(({ fname, id }) => (
+            <li key={id}>
+              <Ciao key={id} id={id} name={fname} />
             </li>
           ))}
         </ul>
