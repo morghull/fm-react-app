@@ -1,14 +1,5 @@
 import { Component } from 'react';
-import CiaoList from '../CiaoList';
-const userDB = [
-  { id: 1, fname: 'ELon' },
-  { id: 2, fname: 'Elen' },
-  { id: 3, fname: 'Andre' },
-  { id: 4, fname: 'Tim' },
-  { id: 9, fname: 'Lee' },
-  { id: 5, fname: 'Lao' },
-  { id: 6, fname: 'Laod' },
-];
+import CiaoList from './CiaoList';
 
 class CiaoSection extends Component {
   constructor(props) {
@@ -16,7 +7,7 @@ class CiaoSection extends Component {
     this.state = {
       isAlphabet: true,
       isStraight: true,
-      users: userDB,
+      users: props.users,
     };
   }
   sortUsersById = () => {
