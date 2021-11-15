@@ -1,21 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { Component } from 'react';
 import Ciao from './components/Ciao';
 
-function App() {
-  const user = {
-    fname: 'ELon',
-    sname: 'Musk',
-  };
-  return (
-    <>
-      <Ciao name="Elon Must" />
-      <Ciao name="Tim Lee" />
-      <Ciao name="Elen" />
-      <Ciao name={`${user.fname} ${user.sname}`} />
-    </>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fname: 'ELon',
+      sname: 'Musk',
+    };
+  }
+  render() {
+    const { fname } = this.state;
+    return (
+      <>
+        <Ciao name="Elen" />
+        <Ciao name={fname} />
+      </>
+    );
+  }
 }
 
 export default App;
