@@ -15,9 +15,24 @@ const usersDB = [
 class UsersList extends Component {
   constructor(props) {
     super(props);
-    this.state = { users: usersDB };
+    this.state = {
+      users: usersDB.map((user) => ({ ...user, isSelected: false })),
+    };
   }
-  userMapping = (user) => <UserCard key={user.id} user={user} />;
+  selectUser = (id) => {
+    const { users } = this.state;
+    //const newUsers = JSON.parse(JSON.stringify(users));
+    this.setState({
+      users: users.map((user) => ({
+        ...user,
+        isSelected:
+          user.id === id ? !user.isSelected : user.isSelected,
+      })),
+    });
+  };
+  userMapping = (user) => (
+    <UserCard key={user.id} user={user} selectUser={this.selectUser} />
+  );
   render() {
     const { users } = this.state;
     return (
