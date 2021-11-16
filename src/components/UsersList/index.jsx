@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import UserCard from '../UserCard';
 
-class UsersList extends Component {
-  toggleUserSelect = (id) => {
-    const { users, setUserSelector } = this.props;
+const UsersList = (props) => {
+  const { users, setUserSelector } = props;
+  const toggleUserSelect = (id) => {
     setUserSelector(
       users.map((user) => ({
         ...user,
@@ -12,22 +12,19 @@ class UsersList extends Component {
       }))
     );
   };
-  userMapping = (user) => (
+  const userMapping = (user) => (
     <UserCard
       key={user.id}
       user={user}
-      toggleUserSelect={this.toggleUserSelect}
+      toggleUserSelect={toggleUserSelect}
     />
   );
-  render() {
-    const { users } = this.props;
-    return (
-      <section>
-        <h1>List of users:</h1>
-        {users.map(this.userMapping)}
-      </section>
-    );
-  }
-}
+  return (
+    <section>
+      <h1>List of users:</h1>
+      {users.map(userMapping)}
+    </section>
+  );
+};
 
 export default UsersList;
