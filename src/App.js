@@ -1,13 +1,9 @@
 import './App.css';
 import React from 'react';
-import UserSelection from './components/UserSelection';
+import UserSection from './components/UserSection';
 
 function App() {
-  return (
-    <>
-      <UserSelection />
-    </>
-  );
+  return <></>;
 }
 
 export default App;
