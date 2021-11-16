@@ -4,7 +4,7 @@ class UserCard extends Component {
   render() {
     const {
       user: { id, fname, isSelected },
-      selectUser,
+      toggleUserSelect,
     } = this.props;
     const styles = {
       border: isSelected ? '3px solid tomato' : 'undefined',
@@ -16,7 +16,7 @@ class UserCard extends Component {
         </h2>
         <button
           onClick={() => {
-            selectUser(id);
+            toggleUserSelect(id);
           }}
         >
           Select this user
