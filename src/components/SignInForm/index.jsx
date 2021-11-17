@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cx from 'classnames';
 import styles from './SignInForm.module.css';
 
 const initialValues = {
@@ -27,24 +28,18 @@ class SignInForm extends Component {
   };
 
   render() {
-    function cx(object) {
-      return Object.entries(object)
-        .filter(([classsName, condition]) => condition)
-        .map(([classsName, condition]) => classsName)
-        .join(' ');
-    }
     const { email, pwd, emailValid, pwdValid } = this.state;
-
-    const emailClassName = cx({
-      [styles.input]: true,
+    const emailCX = cx(styles.input, {
       [styles.invalid]: !emailValid,
     });
+    const pwdCX = cx(styles.input, {
+      [styles.invalid]: !pwdValid,
+    });
 
-    if (!emailValid) emailClassName.push(styles.invalid);
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <input
-          className={emailClassName}
+          className={emailCX}
           type="text"
           value={email}
           name="email"
@@ -52,7 +47,7 @@ class SignInForm extends Component {
           onChange={this.handleInput}
         />
         <input
-          className={styles.input}
+          className={pwdCX}
           type="password"
           name="pwd"
           value={pwd}
