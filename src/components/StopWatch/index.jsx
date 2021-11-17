@@ -7,25 +7,31 @@ class StopWatch extends Component {
     this.state = {
       time: new Date(0, 0, 0, 0, 0, 0, 0),
     };
-    this.intervalId = null;
+    this.timeoutId = null;
+    this.timerDelay = 1000;
+    this.isOn = false;
   }
   tick = () => {
-    //const { time } = this.state;
-    //const newTime = new Date(time.getTime() + 1000);
-    //this.setState({ time: newTime });
-    this.setState((state, props) => {
-      const { time } = state;
-      const newTime = new Date(time.getTime() + 1000);
-      return { time: newTime };
-    });
+    clearTimeout(this.timeoutId);
+
+    this.timeoutId = setTimeout(() => {
+      this.setState((state, props) => {
+        const { time } = state;
+        const newTime = new Date(time.getTime() + 1000);
+        return { time: newTime };
+      });
+    }, this.timerDelay);
   };
   start = () => {
-    if (!this.intervalId)
-      this.intervalId = setInterval(this.tick, 1000);
+    if (!this.timeoutId) {
+      this.isOn = true;
+      this.tick();
+    }
   };
   stop = () => {
-    clearInterval(this.intervalId);
-    this.intervalId = null;
+    this.isOn = false;
+    clearTimeout(this.timeoutId);
+    this.timeoutId = null;
   };
   reset = () => {
     this.stop();
@@ -34,10 +40,12 @@ class StopWatch extends Component {
   componentDidMount() {
     this.start();
   }
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    if (this.isOn) this.tick();
+  }
   componentWillUnmount() {
-    clearInterval(this.intervalId);
-    this.intervalId = null;
+    clearTimeout(this.timeoutId);
+    this.timeoutId = null;
   }
   render() {
     const { time } = this.state;
