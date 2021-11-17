@@ -30,9 +30,6 @@
 .submit {
   margin-top: 1rem;
 }
-.valid {
-  border-color: forestgreen;
-}
 .invalid {
   border-color: tomato;
 }
