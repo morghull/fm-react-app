@@ -1,0 +1,38 @@
+:root {
+  font-size: 1.5em;
+  line-height: 1.3em;
+}
+.form {
+  width: 50vw;
+  height: 50vh;
+  min-height: 10rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 4rem auto;
+  background-color: darkcyan;
+}
+.input {
+  padding: 5px 10px;
+  border: 3px solid gray;
+  font-size: 1.1rem;
+  outline: none;
+}
+.submit {
+  font-size: 1.1rem;
+}
+.input,
+.submit {
+  line-height: inherit;
+}
+.input + .input,
+.submit {
+  margin-top: 1rem;
+}
+.valid {
+  border-color: forestgreen;
+}
+.invalid {
+  border-color: tomato;
+}
