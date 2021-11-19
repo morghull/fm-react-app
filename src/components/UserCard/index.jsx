@@ -38,6 +38,11 @@ export const userPropTypes = {
   isSelected: PropTypes.bool,
 };
 
+UserCard.defaultProps = {
+  userSelector: () => {},
+  user: { id: 0, fname: 'Qwe', isSelected: true },
+};
+
 UserCard.propTypes = {
   user: PropTypes.shape(userPropTypes).isRequired,
   toggleUserSelect: PropTypes.func,

@@ -21,7 +21,7 @@ function App(props) {
   return (
     <>
       <Ciao name={user.name} id={user.id} />
-      <UserCard user={user2}/>
+      <UserCard />
       <UsersList users={[user1,user2]}/>
     </>
   );
