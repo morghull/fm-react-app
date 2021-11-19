@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import UserCard from '../UserCard';
+import PropTypes from 'prop-types';
+import UserCard,{userPropTypes} from '../UserCard';
 
 const UsersList = (props) => {
   const { users, setUserSelector } = props;
@@ -25,6 +26,10 @@ const UsersList = (props) => {
       {users.map(userMapping)}
     </section>
   );
+};
+
+UsersList.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape(userPropTypes)).isRequired,
 };
 
 export default UsersList;

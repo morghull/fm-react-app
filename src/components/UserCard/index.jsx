@@ -1,9 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param {*} props
+ * @param {object} props.user
+ * @param {func} props.toggleUserSelect
+ * @returns jsx
+ */
 const UserCard = (props) => {
   const {
     user: { id, fname, isSelected },
-    toggleUserSelect,
+    toggleUserSelect = () => {},
   } = props;
   const styles = {
     border: isSelected ? '3px solid tomato' : 'undefined',
@@ -22,6 +30,17 @@ const UserCard = (props) => {
       </button>
     </article>
   );
+};
+
+export const userPropTypes = {
+  id: PropTypes.number.isRequired,
+  fname: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool,
+};
+
+UserCard.propTypes = {
+  user: PropTypes.shape(userPropTypes).isRequired,
+  toggleUserSelect: PropTypes.func,
 };
 
 export default UserCard;
