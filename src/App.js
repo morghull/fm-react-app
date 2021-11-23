@@ -1,13 +1,23 @@
 import './App.css';
 import React from 'react';
-import Calendar from './components/Calendar';
-import Ciao from './components/CiaoSection/Ciao';
+
+const List = (props) => {
+  const { text, title, children } = props;
+  return (
+    <>
+      <h2>{text}</h2>
+      <ul title={title}>{children}</ul>
+    </>
+  );
+};
 
 function App(props) {
   return (
     <>
-      <Calendar/>
-      <Ciao id="1" name="Elon"/>
+      <List title="111" text="text">
+        <li>1</li>
+        <li>2</li>
+      </List>
     </>
   );
 }
