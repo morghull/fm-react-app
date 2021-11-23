@@ -1,23 +1,16 @@
 import './App.css';
 import React from 'react';
-
-const List = (props) => {
-  const { text, title, children } = props;
-  return (
-    <>
-      <h2>{text}</h2>
-      <ul title={title}>{children}</ul>
-    </>
-  );
-};
+import FlexContainer from './components/FlexContainer';
+import Ciao from './components/CiaoSection/Ciao';
 
 function App(props) {
   return (
     <>
-      <List title="111" text="text">
-        <li>1</li>
-        <li>2</li>
-      </List>
+      <FlexContainer dir="row">
+        <Ciao id={1} name="Elon"/>
+        <Ciao id={2} name="Eloen"/>
+        <Ciao id={3} name="Tlon"/>
+      </FlexContainer>
     </>
   );
 }

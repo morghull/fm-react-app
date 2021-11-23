@@ -13,7 +13,7 @@ class Ciao extends Component {
     super(props);
     this.state = { isHi: true };
   }
-  buttonOnCLickHandler = () => {
+  buttonOnClickHandler = () => {
     const { isHi } = this.state;
     this.setState({ isHi: !isHi });
   };
@@ -28,7 +28,7 @@ class Ciao extends Component {
           </h2>
           <button
             className={styles.btn}
-            onClick={this.buttonOnCLickHandler}
+            onClick={this.buttonOnClickHandler}
           >
             Ciao
           </button>
