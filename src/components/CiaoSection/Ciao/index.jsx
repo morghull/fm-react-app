@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import styles from './ciao.module.css';
+import styles from './Ciao.module.scss';
 import PropTypes from 'prop-types';
 
 /**

@@ -1,0 +1,15 @@
+%one-line{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.container {
+  max-width: 70px;
+  background-color: darkcyan;
+  @extend %one-line;
+}
+.btn {
+  max-width: 40px;
+  border: 2px solid darkcyan;
+  @extend %one-line;
+}
