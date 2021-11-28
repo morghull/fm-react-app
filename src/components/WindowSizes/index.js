@@ -7,13 +7,19 @@ class WindowSizes extends Component {
       currentHeight: window.innerHeight,
       currentWidth: window.innerWidth,
     };
-    window.onresize = () => {
-      this.setState({
-        currentHeight: window.innerHeight,
-        currentWidth: window.innerWidth,
-      });
-    };
   }
+  onStateChange = () => {
+    this.setState({
+      currentHeight: window.innerHeight,
+      currentWidth: window.innerWidth,
+    });
+  };
+  componentDidMount() {
+    window.addEventListener('resize', this.onStateChange);
+  }
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.onStateChange);
+  };
   render() {
     const { currentHeight, currentWidth } = this.state;
     return (

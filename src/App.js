@@ -5,7 +5,7 @@ import WindowSizes from './components/WindowSizes';
 function App(props) {
   return (
     <>
-      <WindowSizes/>
+      <WindowSizes />
     </>
   );
 }
