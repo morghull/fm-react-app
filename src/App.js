@@ -1,16 +1,11 @@
 import './App.css';
 import React from 'react';
-import FlexContainer from './components/FlexContainer';
-import Ciao from './components/CiaoSection/Ciao';
+import UserLoader from './components/UsersLoader';
 
 function App(props) {
   return (
     <>
-      <FlexContainer dir="row">
-        <Ciao id={1} name="Elon"/>
-        <Ciao id={2} name="Eloen"/>
-        <Ciao id={3} name="Tlon"/>
-      </FlexContainer>
+      <UserLoader />
     </>
   );
 }
