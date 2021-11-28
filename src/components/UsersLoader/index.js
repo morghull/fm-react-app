@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import getUsers from '../../api';
 import Spiner from '../Spiner';
+import config from '../../config';
 
 class UserLoader extends Component {
   constructor(props) {
@@ -10,11 +11,17 @@ class UserLoader extends Component {
       isFetching: false,
       isError: false,
       currentPage: 1,
+      currentPageSize: config.DEFAULT_AMOUNT,
     };
+    this.pageSizes = [5, 10, 15, 20];
   }
   getPage = () => {
-    const { currentPage } = this.state;
-    getUsers({ page: currentPage, results: 3, nat: 'gb' })
+    const { currentPage, currentPageSize } = this.state;
+    getUsers({
+      page: currentPage,
+      results: currentPageSize,
+      nat: 'gb',
+    })
       .then((data) => {
         if (data.error) throw new Error('error');
         this.setState({
@@ -39,8 +46,11 @@ class UserLoader extends Component {
     this.getPage();
   }
   componentDidUpdate(prevProps, prevState) {
-    const { currentPage } = this.state;
-    if (currentPage !== prevState.currentPage) {
+    const { currentPage, currentPageSize } = this.state;
+    if (
+      currentPage !== prevState.currentPage ||
+      currentPageSize !== prevState.currentPageSize
+    ) {
       this.getPage();
     }
   }
@@ -56,8 +66,27 @@ class UserLoader extends Component {
         currentPage: state.currentPage + 1,
       };
     });
+  pageSizeChange = (event) => {
+    this.setState({
+      currentPageSize: Number.parseInt(event.target.value),
+    });
+  };
   getUserJSX = (user) => (
-    <li key={user.login.uuid}>{JSON.stringify(user)}</li>
+    <li
+      key={user.login.uuid}
+    >{`${user.name.first} ${user.name.last}`}</li>
+  );
+  getPageSizeJSX = (size) => (
+    <label key={size}>
+      <input
+        checked={this.state.currentPageSize === size}
+        type="radio"
+        name="results"
+        value={`${size}`}
+        onChange={this.pageSizeChange}
+      />
+      {size}
+    </label>
   );
   render() {
     const { users, isFetching, isError, currentPage } = this.state;
@@ -65,8 +94,12 @@ class UserLoader extends Component {
       <div>
         <h2>User List</h2>
         <button onClick={this.prevPage}>&lt;</button>
-        <div>Current page is:{currentPage}</div>
+
         <button onClick={this.nextPage}>&gt;</button>
+        <div>
+          <span>Current page is:{currentPage}</span>
+          {this.pageSizes.map(this.getPageSizeJSX)}
+        </div>
         <ul>
           {isFetching && <Spiner />}
           {isError && <div>Error</div>}

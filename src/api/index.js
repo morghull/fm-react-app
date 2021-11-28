@@ -1,4 +1,5 @@
 import queryString from 'query-string';
+import config from '../config';
 /**
  *
  * @param {*} options
@@ -13,9 +14,9 @@ import queryString from 'query-string';
 export const getUsers = (options = {}) => {
   const defaultOptions = {
     page: 1,
-    results: 10,
-    format: 'json',
-    seed: 'users',
+    results: config.DEFAULT_AMOUNT,
+    format: config.DEFAULT_FORMAT,
+    seed: config.API_KEY,
     inc: 'gender,name,login,nat',
   };
   const finalOptions = {
@@ -23,8 +24,8 @@ export const getUsers = (options = {}) => {
     ...options,
   };
   const query = queryString.stringify(finalOptions);
-  return fetch(`https://randomuser.me/api/?${query}`).then(
-    (response) => response.json()
+  return fetch(`${config.BASE_URL}?${query}`).then((response) =>
+    response.json()
   );
 };
 
