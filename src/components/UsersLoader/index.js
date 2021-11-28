@@ -49,11 +49,11 @@ class UserLoader extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     const { currentPage, currentPageSize, currentNat } = this.state;
-    if (
+    const isNeedToGetPage =
       currentPage !== prevState.currentPage ||
       currentPageSize !== prevState.currentPageSize ||
-      currentNat !== prevState.currentNat
-    ) {
+      currentNat !== prevState.currentNat;
+    if (isNeedToGetPage) {
       this.getPage();
     }
   }
