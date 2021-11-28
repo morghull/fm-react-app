@@ -1,10 +1,11 @@
+import queryString from 'query-string';
 /**
- * 
- * @param {*} options 
+ *
+ * @param {*} options
  * @param {number} options.page
  * @param {number} options.res
  * @param {string} options.ft
- * @returns 
+ * @returns
  */
 export const getUsers = (options = {}) => {
   const { page = 1, res = 10, format = 'json' } = options;

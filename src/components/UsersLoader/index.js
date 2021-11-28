@@ -15,11 +15,12 @@ class UserLoader extends Component {
   getPage = () => {
     const { currentPage } = this.state;
     getUsers({ page: currentPage, res: 3 })
-      .then((data) =>
+      .then((data) => {
+        if (data.error) throw new Error('error');
         this.setState({
           users: data.results,
-        })
-      )
+        });
+      })
       .catch(() =>
         this.setState({
           isError: true,
@@ -67,7 +68,7 @@ class UserLoader extends Component {
         <div>Current page is:{currentPage}</div>
         <button onClick={this.nextPage}>&gt;</button>
         <ul>
-          {isFetching && <Spiner/>}
+          {isFetching && <Spiner />}
           {isError && <div>Error</div>}
           {users.map(this.getUserJSX)}
         </ul>
