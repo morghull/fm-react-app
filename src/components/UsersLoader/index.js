@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import getUsers from '../../api';
 
 class UserLoader extends Component {
   constructor(props) {
@@ -12,10 +13,7 @@ class UserLoader extends Component {
   }
   getPage = () => {
     const { currentPage } = this.state;
-    fetch(
-      `https://randomuser.me/api/?results=10&page=${currentPage}&seed=users`
-    )
-      .then((response) => response.json())
+    getUsers({ page: currentPage, res: 3 })
       .then((data) =>
         this.setState({
           users: data.results,
@@ -58,12 +56,6 @@ class UserLoader extends Component {
     });
   render() {
     const { users, isFetching, isError, currentPage } = this.state;
-    //  if (isError) {
-    //    return <div>Error</div>;
-    //  }
-    //  if (isFetching) {
-    //    return <div>Loading...</div>;
-    //  }
     return (
       <div>
         <h2>User List</h2>
