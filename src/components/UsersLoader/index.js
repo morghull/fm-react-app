@@ -58,12 +58,12 @@ class UserLoader extends Component {
     });
   render() {
     const { users, isFetching, isError, currentPage } = this.state;
-    if (isError) {
-      return <div>Error</div>;
-    }
-    if (isFetching) {
-      return <div>Loading...</div>;
-    }
+    //  if (isError) {
+    //    return <div>Error</div>;
+    //  }
+    //  if (isFetching) {
+    //    return <div>Loading...</div>;
+    //  }
     return (
       <div>
         <h2>User List</h2>
@@ -71,6 +71,8 @@ class UserLoader extends Component {
         <div>Current page is:{currentPage}</div>
         <button onClick={this.nextPage}>&gt;</button>
         <ul>
+          {isFetching && <div>Loading...</div>}
+          {isError && <div>Error</div>}
           {users.map((user) => (
             <li key={user.login.uuid}>{user.login.uuid}</li>
           ))}
