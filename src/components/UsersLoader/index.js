@@ -12,15 +12,17 @@ class UserLoader extends Component {
       isError: false,
       currentPage: 1,
       currentPageSize: config.DEFAULT_AMOUNT,
+      currentNat: 'GB',
     };
     this.pageSizes = [5, 10, 15, 20];
+    this.nats = ['br', 'us', 'fr', 'gb'];
   }
   getPage = () => {
-    const { currentPage, currentPageSize } = this.state;
+    const { currentPage, currentPageSize, currentNat } = this.state;
     getUsers({
       page: currentPage,
       results: currentPageSize,
-      nat: 'gb',
+      nat: currentNat,
     })
       .then((data) => {
         if (data.error) throw new Error('error');
@@ -46,10 +48,11 @@ class UserLoader extends Component {
     this.getPage();
   }
   componentDidUpdate(prevProps, prevState) {
-    const { currentPage, currentPageSize } = this.state;
+    const { currentPage, currentPageSize, currentNat } = this.state;
     if (
       currentPage !== prevState.currentPage ||
-      currentPageSize !== prevState.currentPageSize
+      currentPageSize !== prevState.currentPageSize ||
+      currentNat !== prevState.currentNat
     ) {
       this.getPage();
     }
@@ -66,9 +69,14 @@ class UserLoader extends Component {
         currentPage: state.currentPage + 1,
       };
     });
-  pageSizeChange = (event) => {
+  pageSizeChangeHandler = (event) => {
     this.setState({
       currentPageSize: Number.parseInt(event.target.value),
+    });
+  };
+  natChangeHandler = (event) => {
+    this.setState({
+      currentNat: event.target.value,
     });
   };
   getUserJSX = (user) => (
@@ -83,22 +91,26 @@ class UserLoader extends Component {
         type="radio"
         name="results"
         value={`${size}`}
-        onChange={this.pageSizeChange}
+        onChange={this.pageSizeChangeHandler}
       />
       {size}
     </label>
   );
+  getNatJSX = (nat) => <option value={nat}>{nat}</option>;
   render() {
-    const { users, isFetching, isError, currentPage } = this.state;
+    const { users, isFetching, isError, currentPage, currentNat } =
+      this.state;
     return (
       <div>
         <h2>User List</h2>
         <button onClick={this.prevPage}>&lt;</button>
-
         <button onClick={this.nextPage}>&gt;</button>
         <div>
           <span>Current page is:{currentPage}</span>
           {this.pageSizes.map(this.getPageSizeJSX)}
+          <select value={currentNat} onChange={this.natChangeHandler}>
+            {this.nats.map(this.getNatJSX)}
+          </select>
         </div>
         <ul>
           {isFetching && <Spiner />}
