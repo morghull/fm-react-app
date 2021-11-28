@@ -14,7 +14,7 @@ class UserLoader extends Component {
   }
   getPage = () => {
     const { currentPage } = this.state;
-    getUsers({ page: currentPage, res: 3 })
+    getUsers({ page: currentPage, results: 3, nat: 'gb' })
       .then((data) => {
         if (data.error) throw new Error('error');
         this.setState({
@@ -57,7 +57,7 @@ class UserLoader extends Component {
       };
     });
   getUserJSX = (user) => (
-    <li key={user.login.uuid}>{user.login.uuid}</li>
+    <li key={user.login.uuid}>{JSON.stringify(user)}</li>
   );
   render() {
     const { users, isFetching, isError, currentPage } = this.state;
