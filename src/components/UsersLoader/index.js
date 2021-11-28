@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import getUsers from '../../api';
+import Spiner from '../Spiner';
 
 class UserLoader extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class UserLoader extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     const { currentPage } = this.state;
-    if (currentPage != prevState.currentPage) {
+    if (currentPage !== prevState.currentPage) {
       this.getPage();
     }
   }
@@ -54,6 +55,9 @@ class UserLoader extends Component {
         currentPage: state.currentPage + 1,
       };
     });
+  getUserJSX = (user) => (
+    <li key={user.login.uuid}>{user.login.uuid}</li>
+  );
   render() {
     const { users, isFetching, isError, currentPage } = this.state;
     return (
@@ -63,11 +67,9 @@ class UserLoader extends Component {
         <div>Current page is:{currentPage}</div>
         <button onClick={this.nextPage}>&gt;</button>
         <ul>
-          {isFetching && <div>Loading...</div>}
+          {isFetching && <Spiner/>}
           {isError && <div>Error</div>}
-          {users.map((user) => (
-            <li key={user.login.uuid}>{user.login.uuid}</li>
-          ))}
+          {users.map(this.getUserJSX)}
         </ul>
       </div>
     );
